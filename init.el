@@ -11,6 +11,7 @@
  '(confirm-kill-processes nil)
  '(create-lockfiles nil)
  '(cursor-in-non-selected-windows nil)
+ '(custom-enabled-themes '(manoj-dark))
  '(delete-by-moving-to-trash t)
  '(global-auto-revert-mode t)
  '(global-subword-mode t)
@@ -21,6 +22,8 @@
  '(initial-buffer-choice t)
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
+ '(package-archives '(("melpa" . "https://melpa.org/packages/")))
+ '(package-user-dir "~/.config/emacs/packages")
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
@@ -30,4 +33,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :extend nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 160 :width normal :foundry "GOOG" :family "Consolas")))))
+ )
