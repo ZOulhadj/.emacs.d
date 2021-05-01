@@ -11,7 +11,7 @@
  '(confirm-kill-processes nil)
  '(create-lockfiles nil)
  '(cursor-in-non-selected-windows nil)
- '(custom-enabled-themes '(leuven))
+ '(custom-enabled-themes '(manoj-dark))
  '(delete-by-moving-to-trash t)
  '(global-auto-revert-mode t)
  '(global-subword-mode t)
@@ -24,6 +24,8 @@
  '(initial-buffer-choice t)
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
+ '(package-archives '(("melpa" . "https://melpa.org/packages/")))
+ '(package-selected-packages '(pandoc-mode))
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -37,11 +39,13 @@
  '(default ((t (:height 160 :family "Consolas")))))
 
 
+(package-initialize)
 
-(defun load-config ()
+(defun open-configuration ()
   (interactive)
   (find-file "~/.config/emacs/init.el"))
-(global-set-key (kbd "C-c d") 'load-config)
+
+(global-set-key (kbd "C-c d") 'open-configuration)
 
 
 (put 'narrow-to-region 'disabled nil)
