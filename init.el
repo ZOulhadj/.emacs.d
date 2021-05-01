@@ -16,19 +16,18 @@
  '(global-auto-revert-mode t)
  '(global-subword-mode t)
  '(help-window-select t)
+ '(ido-enable-flex-matching t)
+ '(ido-mode 'both nil (ido))
  '(indent-tabs-mode nil)
  '(inhibit-startup-echo-area-message "zakariya")
  '(inhibit-startup-screen t)
  '(initial-buffer-choice t)
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
- '(package-archives '(("melpa" . "https://melpa.org/packages/")))
- '(package-user-dir "~/.config/emacs/packages")
+ '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
- '(user-full-name "Zakariya Oulhadj")
- '(user-mail-address "zakariyaoulhadj01@gmail.com")
  '(vc-make-backup-files t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -36,3 +35,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 160 :family "Consolas")))))
+
+
+
+(defun load-config ()
+  (interactive)
+  (find-file "~/.config/emacs/init.el"))
+(global-set-key (kbd "C-c d") 'load-config)
+
+
+(put 'narrow-to-region 'disabled nil)
