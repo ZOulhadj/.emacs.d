@@ -13,6 +13,7 @@
  '(cursor-in-non-selected-windows nil)
  '(custom-enabled-themes '(manoj-dark))
  '(delete-by-moving-to-trash t)
+ '(gc-cons-threshold 100000000)
  '(global-auto-revert-mode t)
  '(global-subword-mode t)
  '(help-window-select t)
@@ -24,8 +25,12 @@
  '(initial-buffer-choice t)
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
- '(package-archives '(("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages '(which-key pandoc-mode))
+ '(package-archives
+   '(("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/")
+     ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+ '(package-selected-packages '(company flycheck lsp-mode which-key pandoc-mode))
+ '(package-user-dir "~/.config/emacs/packages")
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
@@ -39,9 +44,32 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 160 :family "Consolas")))))
 
+
+(setq read-process-output-max (* 1024 1024))
+
 ;; Initialise packages
 (package-initialize)
+(package-refresh-contents)
+
+
 (which-key-mode)
+
+
+(global-flycheck-mode)
+
+(global-company-mode)
+
+(require 'lsp-mode)
+(add-hook 'prog-mode-hook #'lsp)
+
+(setq lsp-keymap-prefix "C-c l")
+(setq lsp-log-io nil)
+(setq lsp-enable-links nil)
+(setq lsp-signature-render-documentation nil)
+(setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-ui-doc-enable nil)
+(setq lsp-completion-enable-additional-text-edit nil)
+(setq web-mode-enable-current-element-highlight t)
 
 ;; Enable disabled modes
 (put 'narrow-to-region 'disabled nil)
