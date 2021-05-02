@@ -38,14 +38,24 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 160 :family "Consolas")))))
 
-
+;; Initialise packages
 (package-initialize)
 
+;; Enable disabled modes
+(put 'narrow-to-region 'disabled nil)
+
+;; Functions
 (defun open-configuration ()
   (interactive)
   (find-file "~/.config/emacs/init.el"))
 
+;; Keybindings
 (global-set-key (kbd "C-c d") 'open-configuration)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+;; Hooks
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
-(put 'narrow-to-region 'disabled nil)
+;; Replace all yes or no question with y or n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
