@@ -25,10 +25,11 @@
  '(initial-scratch-message nil)
  '(menu-bar-mode nil)
  '(package-archives '(("melpa" . "https://melpa.org/packages/")))
- '(package-selected-packages '(pandoc-mode))
+ '(package-selected-packages '(which-key pandoc-mode))
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
+ '(tab-width 4)
  '(tool-bar-mode nil)
  '(vc-make-backup-files t))
 (custom-set-faces
@@ -40,6 +41,7 @@
 
 ;; Initialise packages
 (package-initialize)
+(which-key-mode)
 
 ;; Enable disabled modes
 (put 'narrow-to-region 'disabled nil)
@@ -58,4 +60,3 @@
 
 ;; Replace all yes or no question with y or n
 (defalias 'yes-or-no-p 'y-or-n-p)
-
