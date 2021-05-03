@@ -61,8 +61,7 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
-  (setq lsp-log-io nil
-        lsp-enable-links nil
+  (setq lsp-enable-links nil
         lsp-signature-render-documentation nil
         lsp-headerline-breadcrumb-enable nil
         lsp-ui-doc-enable nil
