@@ -29,7 +29,8 @@
    '(("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
- '(package-selected-packages '(company flycheck lsp-mode which-key pandoc-mode))
+ '(package-selected-packages
+   '(diminish use-package company flycheck lsp-mode which-key pandoc-mode))
  '(package-user-dir "~/.config/emacs/packages")
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
@@ -49,27 +50,35 @@
 
 ;; Initialise packages
 (package-initialize)
-(package-refresh-contents)
+;;(package-refresh-contents)
 
+(use-package which-key
+  :config
+  (which-key-mode)
+  :diminish)
 
-(which-key-mode)
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-log-io nil
+        lsp-enable-links nil
+        lsp-signature-render-documentation nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-ui-doc-enable nil
+        lsp-completion-enable-additional-text-edit nil
+        web-mode-enable-current-element-highlight t)
+  :hook ((prog-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :diminish)
 
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode)
+  :diminish)
 
-(global-flycheck-mode)
-
-(global-company-mode)
-
-(require 'lsp-mode)
-(add-hook 'prog-mode-hook #'lsp)
-
-(setq lsp-keymap-prefix "C-c l")
-(setq lsp-log-io nil)
-(setq lsp-enable-links nil)
-(setq lsp-signature-render-documentation nil)
-(setq lsp-headerline-breadcrumb-enable nil)
-(setq lsp-ui-doc-enable nil)
-(setq lsp-completion-enable-additional-text-edit nil)
-(setq web-mode-enable-current-element-highlight t)
+(use-package company
+  :hook (prog-mode . company-mode)
+  :diminish)
 
 ;; Enable disabled modes
 (put 'narrow-to-region 'disabled nil)
