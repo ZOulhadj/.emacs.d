@@ -1,3 +1,13 @@
+;;; init.el --- Initialisation -*- lexical-binding: t -*-
+
+;;; Commentary:
+;;
+;; Emacs configuration file that is loaded at startup which sets all options
+;; and personal customisations.
+;;
+
+;;; Code:
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -67,6 +77,15 @@
 ;; Hooks
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                    ;;
+;;     External package settings      ;;
+;;                                    ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
 ;; Initialise packages
 (package-initialize)
 
@@ -101,3 +120,6 @@
 (use-package company
   :hook (prog-mode . company-mode)
   :diminish)
+
+
+;;; init.el ends here
