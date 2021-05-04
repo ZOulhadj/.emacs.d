@@ -39,7 +39,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
  '(package-selected-packages
-   '(elfeed diminish use-package company flycheck lsp-mode which-key pandoc-mode))
+   '(diminish use-package company flycheck lsp-mode which-key pandoc-mode))
  '(package-user-dir "~/.config/emacs/packages")
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
@@ -93,11 +93,6 @@
   :config
   (which-key-mode)
   :diminish)
-
-(use-package elfeed
-  :init
-  (setq elfeed-feeds
-        '("https://reddit.com/r/emacs/.rss")))
 
 (use-package lsp-mode
   :init
