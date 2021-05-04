@@ -39,7 +39,7 @@
      ("gnu" . "https://elpa.gnu.org/packages/")
      ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
  '(package-selected-packages
-   '(diminish use-package company flycheck lsp-mode which-key pandoc-mode))
+   '(pdf-tools diminish use-package company flycheck lsp-mode which-key pandoc-mode))
  '(package-user-dir "~/.config/emacs/packages")
  '(ring-bell-function 'ignore)
  '(scroll-bar-mode nil)
@@ -68,7 +68,7 @@
 (defun open-configuration ()
   "Load the Emacs configuration file."
   (interactive)
-  (find-file (concat user-emacs-directory "init.el")))
+  (find-file (concat user-emacs-directory (buffer-name))))
 
 ;; Keybindings
 (global-set-key (kbd "C-c d") 'open-configuration)
@@ -118,3 +118,4 @@
 
 
 ;;; init.el ends here
+(buffer-name)
