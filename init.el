@@ -118,4 +118,3 @@
 
 
 ;;; init.el ends here
-(buffer-name)
