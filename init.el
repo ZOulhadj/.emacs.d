@@ -68,7 +68,7 @@
 (defun open-configuration ()
   "Load the Emacs configuration file."
   (interactive)
-  (find-file (concat user-emacs-directory (buffer-name))))
+  (find-file (concat user-emacs-directory "init.el")))
 
 ;; Keybindings
 (global-set-key (kbd "C-c d") 'open-configuration)
