@@ -4,7 +4,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(backup-by-copying t)
- '(backup-directory-alist '(("" . "~/.config/emacs/backups")))
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(confirm-kill-emacs 'y-or-n-p)
@@ -45,12 +44,31 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:height 160 :family "Consolas")))))
 
-
+;; Set dynamically evaluated settings outside the customisation interface
 (setq read-process-output-max (* 1024 1024))
+(setq backup-directory-alist `(("" . ,(concat user-emacs-directory "backups"))))
+
+;; Replace all yes or no question with y or n
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Enable disabled modes
+(put 'narrow-to-region 'disabled nil)
+
+;; Functions
+(defun open-configuration ()
+  "Load the Emacs configuration file."
+  (interactive)
+  (find-file (concat user-emacs-directory "init.el")))
+
+;; Keybindings
+(global-set-key (kbd "C-c d") 'open-configuration)
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
+;; Hooks
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; Initialise packages
 (package-initialize)
-;;(package-refresh-contents)
 
 (use-package which-key
   :config
@@ -83,21 +101,3 @@
 (use-package company
   :hook (prog-mode . company-mode)
   :diminish)
-
-;; Enable disabled modes
-(put 'narrow-to-region 'disabled nil)
-
-;; Functions
-(defun open-configuration ()
-  (interactive)
-  (find-file "~/.config/emacs/init.el"))
-
-;; Keybindings
-(global-set-key (kbd "C-c d") 'open-configuration)
-(global-set-key (kbd "C-x k") 'kill-this-buffer)
-
-;; Hooks
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
-;; Replace all yes or no question with y or n
-(defalias 'yes-or-no-p 'y-or-n-p)
