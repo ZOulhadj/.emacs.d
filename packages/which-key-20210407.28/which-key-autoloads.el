@@ -1,4 +1,4 @@
-;;; which-key-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; which-key-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -22,16 +22,10 @@ or call the function `which-key-mode'.")
 (autoload 'which-key-mode "which-key" "\
 Toggle which-key-mode.
 
-If called interactively, toggle `Which-Key mode'.  If the prefix
-argument is positive, enable the mode, and if it is zero or
-negative, disable the mode.
-
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
-
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+If called interactively, enable Which-Key mode if ARG is
+positive, and disable it if ARG is zero or negative.  If called
+from Lisp, also enable the mode if ARG is omitted or nil, and
+toggle it if ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -207,7 +201,7 @@ is selected interactively by mode in `minor-mode-map-alist'.
 Show all bindings in KEYMAP using which-key. KEYMAP
 is selected interactively by mode in `minor-mode-map-alist'." t nil)
 
-(register-definition-prefixes "which-key" '("which-key-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "which-key" '("which-key-")))
 
 ;;;***
 

@@ -1,4 +1,4 @@
-;;; pandoc-mode-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;; pandoc-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 
@@ -12,16 +12,10 @@
 (autoload 'pandoc-mode "pandoc-mode" "\
 Minor mode for interacting with Pandoc.
 
-If called interactively, toggle `Pandoc mode'.  If the prefix
-argument is positive, enable the mode, and if it is zero or
-negative, disable the mode.
-
-If called from Lisp, toggle the mode if ARG is `toggle'.  Enable
-the mode if ARG is nil, omitted, or is a positive number.
-Disable the mode if ARG is a negative number.
-
-The mode's hook is called both when the mode is enabled and when
-it is disabled.
+If called interactively, enable Pandoc mode if ARG is positive,
+and disable it if ARG is zero or negative.  If called from Lisp,
+also enable the mode if ARG is omitted or nil, and toggle it if
+ARG is `toggle'; disable the mode otherwise.
 
 \(fn &optional ARG)" t nil)
 
@@ -29,7 +23,7 @@ it is disabled.
 Turn on pandoc-mode if a pandoc settings file exists.
 This is for use in major mode hooks." nil nil)
 
-(register-definition-prefixes "pandoc-mode" '("pandoc-"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pandoc-mode" '("pandoc-")))
 
 ;;;***
 
@@ -37,7 +31,7 @@ This is for use in major mode hooks." nil nil)
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from pandoc-mode-utils.el
 
-(register-definition-prefixes "pandoc-mode-utils" '("base-header-level" "bibliography" "citation-abbreviations" "columns" "csl" "def" "dpi" "email-obfuscation" "eol" "epub-chapter-level" "highlight-style" "id-prefix" "indented-code-classes" "ipynb-output" "jsmath" "katex" "latex" "mimetex" "number-offset" "pandoc-" "pdf-engine" "reference-location" "shift-heading-level-by" "slide-level" "tab-stop" "title-prefix" "track-changes" "webtex" "wrap"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "pandoc-mode-utils" '("base-header-level" "bibliography" "citation-abbreviations" "columns" "csl" "def" "dpi" "email-obfuscation" "eol" "epub-chapter-level" "highlight-style" "id-prefix" "indented-code-classes" "ipynb-output" "jsmath" "katex" "latex" "mimetex" "number-offset" "pandoc-" "pdf-engine" "reference-location" "shift-heading-level-by" "slide-level" "tab-stop" "title-prefix" "track-changes" "webtex" "wrap")))
 
 ;;;***
 
