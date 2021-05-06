@@ -123,26 +123,47 @@
   (package-install 'use-package))
 
 
-(use-package use-package
-  :init
-  (setq use-package-always-ensure t))
+;; (use-package use-package
+;;   :init
+;;   (setq use-package-always-ensure t))
 
 
+
+;; Core
 (use-package gruvbox-theme
+  :ensure t
   :config
   (load-theme 'gruvbox t))
 
 
-(use-package diminish)
+(use-package diminish
+  :ensure t)
 
 
 (use-package which-key
+  :ensure t
   :config
   (which-key-mode)
   :diminish)
 
 
+;; Web development
+(use-package web-mode
+  :ensure t
+  :mode (
+         ("\\.html" . web-mode)))
+
+
+(use-package emmet-mode
+  :ensure t
+  :hook (
+         (sgml-mode . emmet-mode)
+         (web-mode . emmet-mode)))
+
+
+;; Programming
 (use-package lsp-mode
+  :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
@@ -158,32 +179,33 @@
 
 
 (use-package flycheck
+  :ensure t
   :hook (prog-mode . flycheck-mode)
   :diminish)
 
 
 (use-package company
+  :ensure t
   :hook (prog-mode . company-mode)
   :diminish)
 
 
 (use-package pandoc-mode
+  :ensure t
   :hook (
          (markdown-mode . pandoc-mode)
          (pandoc-mode . 'pandoc-load-default-settings)))
 
 
-(use-package web-mode
-  :mode (
-         ("\\.html" . web-mode)))
-
-
-(use-package emmet-mode
-  :hook (
-         (sgml-mode . emmet-mode)
-         (web-mode . emmet-mode)))
-
-
-
+;; Core (built-in)
+(use-package newsticker
+  :custom (
+           newsticker-url-list
+           '(("Emacs" "https://reddit.com/r/emacs/.rss")
+             ("Unix Rices" "https://reddit.com/r/unixporn/.rss")
+             ("Arch" "https://reddit.com/r/archlinux/.rss")
+             ("Sky News" "http://feeds.skynews.com/feeds/rss/home.xml")
+             ("Hacker News" "https://news.ycombinator.com/rss")
+             )))
 
 ;;; init.el ends here
