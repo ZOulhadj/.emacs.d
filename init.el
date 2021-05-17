@@ -33,9 +33,11 @@
 (setq-default
  indent-tabs-mode nil)
 
+(global-subword-mode 1)
+(delete-selection-mode 1)
+
 (setq
  tab-width 4
- global-subword-mode t
  global-auto-revert-mode t
  delete-by-moving-to-trash t
  create-lockfiles nil
@@ -130,11 +132,10 @@
 
 
 ;; Core
-(use-package gruvbox-theme
+(use-package naysayer-theme
   :ensure t
   :config
-  (load-theme 'gruvbox t))
-
+  (load-theme 'naysayer t))
 
 (use-package diminish
   :ensure t)
@@ -174,8 +175,7 @@
         lsp-completion-enable-additional-text-edit nil
         web-mode-enable-current-element-highlight t)
   :hook ((prog-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration))
-  :diminish)
+         (lsp-mode . lsp-enable-which-key-integration)))
 
 
 (use-package flycheck
