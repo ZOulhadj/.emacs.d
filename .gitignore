@@ -3,6 +3,7 @@ backups/
 eln-cache/
 ido.last
 elpa/
+eshell/
 .lsp-session-v1
 packages/
 newsticker

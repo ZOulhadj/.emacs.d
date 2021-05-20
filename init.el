@@ -30,8 +30,7 @@
  ring-bell-function 'ignore)
 
 ;; Editing
-(setq-default
- indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 (global-subword-mode 1)
 (delete-selection-mode 1)
@@ -43,13 +42,13 @@
  create-lockfiles nil
  help-window-select t
  select-enable-clipboard t
- select-enable-primary t
+ kill-whole-line t
  )
 
-(ido-mode 1)
-(setq
- ido-everywhere t
- ido-enable-flex-matching t)
+;;(ido-mode 1)
+;;(setq
+;; ido-everywhere t
+;; ido-enable-flex-matching t)
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -76,6 +75,7 @@
   (find-file (concat user-emacs-directory "init.el")))
 
 ;; Keybindings
+(global-set-key [f1] 'shell)
 (global-set-key (kbd "C-c d") 'open-configuration)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
@@ -119,93 +119,58 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
+(use-package use-package
+  :init
+  (setq use-package-always-ensure t))
 
-;; (use-package use-package
-;;   :init
-;;   (setq use-package-always-ensure t))
-
-
-
-;; Core
 (use-package naysayer-theme
-  :ensure t
   :config
   (load-theme 'naysayer t))
 
-(use-package diminish
-  :ensure t)
-
+(use-package diminish)
 
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode)
   :diminish)
 
-
-;; Web development
-(use-package web-mode
-  :ensure t
-  :mode (
-         ("\\.html" . web-mode)))
-
-
-(use-package emmet-mode
-  :ensure t
-  :hook (
-         (sgml-mode . emmet-mode)
-         (web-mode . emmet-mode)))
-
-
-;; Programming
-(use-package lsp-mode
-  :ensure t
-  :init
-  (setq lsp-keymap-prefix "C-c l")
-  :config
-  (setq lsp-enable-links nil
-        lsp-signature-render-documentation nil
-        lsp-headerline-breadcrumb-enable nil
-        lsp-ui-doc-enable nil
-        lsp-completion-enable-additional-text-edit nil
-        web-mode-enable-current-element-highlight t)
-  :hook ((prog-mode . lsp)
-         (lsp-mode . lsp-enable-which-key-integration)))
-
-
-(use-package flycheck
-  :ensure t
-  :hook (prog-mode . flycheck-mode)
-  :diminish)
-
-
-(use-package company
-  :ensure t
-  :hook (prog-mode . company-mode)
-  :diminish)
-
-
 (use-package pandoc-mode
-  :ensure t
   :hook (
          (markdown-mode . pandoc-mode)
          (pandoc-mode . 'pandoc-load-default-settings)))
 
+(use-package magit
+  :bind
+  ("C-c g" . #'magit-status))
 
-;; Core (built-in)
-(use-package newsticker
-  :custom (
-           newsticker-url-list
-           '(("Emacs" "https://reddit.com/r/emacs/.rss")
-             ("Unix Rices" "https://reddit.com/r/unixporn/.rss")
-             ("Arch" "https://reddit.com/r/archlinux/.rss")
-             ("Sky News" "http://feeds.skynews.com/feeds/rss/home.xml")
-             ("Hacker News" "https://news.ycombinator.com/rss")
-             )))
+(use-package company
+  :hook
+  (prog-mode . company-mode)
+  :config
+  (setq company-idle-delay 0.5
+        company-selection-wrap-around t
+        company-tooltip-align-annotations t
+        company-require-match nil
+        company-frontends '(company-pseudo-tooltip-frontend
+                            company-echo-metadata-frontend))
+  :bind
+  (("C-." . #'company-complete)
+   (:map company-active-map
+         ([tab] . 'company-complete-selection)
+         ("RET" . nil)))
+
+  :diminish)
+
+
+(use-package flycheck
+  :hook
+  (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-display-errors-delay 0.1)
+  :diminish)
 
 ;;; init.el ends here
