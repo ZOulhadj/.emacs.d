@@ -115,10 +115,11 @@
 ;; Initialise packages
 (package-initialize)
 
-
+;; Update package archives
 (unless package-archive-contents
   (package-refresh-contents))
 
+;; Install use-package is not already installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -127,11 +128,17 @@
   :init
   (setq use-package-always-ensure t))
 
+(use-package diminish)
+
 (use-package naysayer-theme
   :config
   (load-theme 'naysayer t))
 
-(use-package diminish)
+(use-package dimmer
+  :custom
+  (dimmer-fraction 0.5)
+  :config
+  (dimmer-mode))
 
 (use-package which-key
   :config
@@ -142,6 +149,8 @@
   :hook (
          (markdown-mode . pandoc-mode)
          (pandoc-mode . 'pandoc-load-default-settings)))
+
+(use-package vterm)
 
 (use-package magit
   :bind
