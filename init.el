@@ -75,16 +75,11 @@
   (interactive)
   (find-file (concat user-emacs-directory "init.el")))
 
-
-(defun my-dired-mode-hook ()
-  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
-
-(add-hook 'dired-mode-hook #'my-dired-mode-hook)
-
 ;; Keybindings
 (global-set-key [f1] 'shell)
 (global-set-key (kbd "C-c d") 'open-configuration)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                    ;;
