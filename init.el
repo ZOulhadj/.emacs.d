@@ -67,12 +67,19 @@
 
 ;; Enable disabled modes
 (put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
 
 ;; Functions
 (defun open-configuration ()
   "Load the Emacs configuration file."
   (interactive)
   (find-file (concat user-emacs-directory "init.el")))
+
+
+(defun my-dired-mode-hook ()
+  (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file))
+
+(add-hook 'dired-mode-hook #'my-dired-mode-hook)
 
 ;; Keybindings
 (global-set-key [f1] 'shell)
