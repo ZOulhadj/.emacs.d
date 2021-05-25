@@ -79,7 +79,9 @@
 (global-set-key [f1] 'shell)
 (global-set-key (kbd "C-c d") 'open-configuration)
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
-(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+
+(eval-after-load "dired" '(progn
+                            (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                    ;;
@@ -125,6 +127,9 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
 
 (use-package use-package
   :init
