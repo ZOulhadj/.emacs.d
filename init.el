@@ -19,6 +19,8 @@
  custom-file (concat user-emacs-directory "custom.el"))
 
 ;; User Interface
+;;(when (eq system-type 'darwin) (ns-auto-titlebar-mode))
+
 (menu-bar-mode 0)
 (tool-bar-mode 0)
 (scroll-bar-mode 0)
@@ -34,10 +36,10 @@
 
 (global-subword-mode 1)
 (delete-selection-mode 1)
+(global-auto-revert-mode 1)
 
 (setq
  tab-width 4
- global-auto-revert-mode t
  delete-by-moving-to-trash t
  create-lockfiles nil
  help-window-select t
@@ -45,10 +47,10 @@
  kill-whole-line t
  )
 
-;;(ido-mode 1)
-;;(setq
-;; ido-everywhere t
-;; ido-enable-flex-matching t)
+(ido-mode 1)
+(setq
+ ido-everywhere t
+ ido-enable-flex-matching t)
 
 (add-hook 'before-save-hook 'whitespace-cleanup)
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -137,15 +139,13 @@
 
 (use-package diminish)
 
-(use-package naysayer-theme
-  :config
-  (load-theme 'naysayer t))
+;; (use-package intellij-theme
+;;   :config
+;;   (load-theme 'intellij))
 
-(use-package dimmer
-  :custom
-  (dimmer-fraction 0.5)
+(use-package modus-themes
   :config
-  (dimmer-mode))
+  (load-theme 'modus-vivendi t))
 
 (use-package which-key
   :config
@@ -157,11 +157,16 @@
          (markdown-mode . pandoc-mode)
          (pandoc-mode . 'pandoc-load-default-settings)))
 
-(use-package vterm)
-
 (use-package magit
   :bind
   ("C-c g" . #'magit-status))
+
+(use-package projectile
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map))
+  :diminish)
 
 (use-package company
   :hook
@@ -181,6 +186,21 @@
 
   :diminish)
 
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (setq lsp-log-io nil
+        lsp-enable-links nil
+        lsp-signature-render-documentation nil
+        lsp-headerline-breadcrumb-enable nil
+        lsp-ui-doc-enable nil
+        lsp-completion-enable-additional-text-edit nil
+        web-mode-enable-current-element-highlight t)
+  :hook ((prog-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :diminish)
+
 
 (use-package flycheck
   :hook
@@ -188,5 +208,11 @@
   :custom
   (flycheck-display-errors-delay 0.1)
   :diminish)
+
+(use-package ns-auto-titlebar
+  :config
+  (when (eq system-type 'darwin) (ns-auto-titlebar-mode)))
+
+
 
 ;;; init.el ends here
